@@ -1,16 +1,17 @@
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { cn } from "../../utils/merge";
 
-export interface MovieCardProps {
-  movie: {
-    _id: string;
-    name: string;
-    imgUrl: string;
-    link: string;
-    likes: number;
-    watched: boolean;
-  };
+export interface MovieProps {
+  _id: string;
+  name: string;
+  imgUrl: string;
+  link: string;
+  likes: number;
+  watched: boolean;
+}
 
+export interface MovieCardProps {
+  movie: MovieProps;
   handleSubmitLike: (id: string) => void;
   handleSubmitDisLike: (id: string) => void;
   handleSubmitWatched: (id: string) => void;

@@ -1,10 +1,10 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
-import { MovieCardProps } from "../components/MovieCard";
+import { MovieProps } from "../components/MovieCard";
 
 type ContextType = {
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
-  movieList: MovieCardProps[];
+  movieList: MovieProps[];
   setMovieList: (value: any) => void;
 };
 export const GlobalContext = createContext<ContextType>({
@@ -16,7 +16,7 @@ export const GlobalContext = createContext<ContextType>({
 
 export const GlobalProvider = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState<ContextType["isLoading"]>(true);
-  const [movieList, setMovieList] = useState<MovieCardProps[]>([]);
+  const [movieList, setMovieList] = useState<MovieProps[]>([]);
 
   return (
     <GlobalContext.Provider

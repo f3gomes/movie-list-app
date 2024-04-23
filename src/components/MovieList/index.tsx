@@ -1,11 +1,12 @@
-import { useEffect } from "react";
-import { MovieCard } from "../MovieCard";
+import { useEffect, useState } from "react";
+import { MovieCard, MovieProps } from "../MovieCard";
 import { getMovies } from "../../actions/getMovieList";
 import { sendLike } from "../../actions/sendLike";
 import { sendStatus } from "../../actions/sendStatus";
 import { useGlobalContext } from "../../context/Provider";
 
 export function MovieList() {
+  const [watched, setWatched] = useState(false);
   const { isLoading, setIsLoading, movieList, setMovieList } =
     useGlobalContext();
 
@@ -42,13 +43,21 @@ export function MovieList() {
   };
 
   const getMovieStatusById = (id: string) => {
-    const movie = movieList.filter((item: any) => item._id === id)[0];
+    const movie = movieList.filter((item: MovieProps) => item._id === id)[0];
 
     if (movie) {
-      const { watched }: any = movie;
+      const { watched } = movie;
       return watched;
     }
   };
+
+  const handleFilterToggle = () => {
+    setWatched(!watched);
+  };
+
+  const filteredList = movieList.filter((movie) => {
+    return watched ? movie.watched : !movie.watched;
+  });
 
   useEffect(() => {
     getMovies(setMovieList, setIsLoading);
@@ -70,7 +79,19 @@ export function MovieList() {
         </div>
       ) : (
         <div className="flex flex-col gap-2">
-          {movieList.map((item: any) => {
+          <div className="flex gap-2">
+            <input
+              id="filter"
+              name="filter"
+              type="checkbox"
+              checked={watched}
+              className="scale-125"
+              onChange={handleFilterToggle}
+            />
+            <label htmlFor="filter">Filmes já assistidos</label>
+          </div>
+
+          {filteredList.map((item: MovieProps) => {
             return (
               <MovieCard
                 movie={item}

@@ -58,7 +58,7 @@ export function Header() {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             placeholder="Digite o nome do filme e pressione Enter"
-            className="h-10 border-2 px-8 w-full rounded-sm"
+            className="h-10 border-2 px-9 w-full rounded-sm"
           />
         </form>
 
@@ -66,12 +66,12 @@ export function Header() {
           <IoMdCloseCircleOutline
             size={24}
             onClick={handleClearResults}
-            className="absolute top-2 left-1 cursor-pointer text-slate-500 hover:text-slate-400 transition duration-200"
+            className="absolute top-2 left-2 cursor-pointer text-slate-500 hover:text-slate-400 transition duration-200"
           />
         ) : (
           <IoSearch
             size={24}
-            className="absolute top-2 left-1 text-slate-500"
+            className="absolute top-2 left-2 text-slate-500"
           />
         )}
       </div>
