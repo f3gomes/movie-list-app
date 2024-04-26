@@ -1,5 +1,6 @@
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { cn } from "../../utils/merge";
+import { GenreList } from "../GenreList";
 
 export interface MovieProps {
   _id: string;
@@ -8,6 +9,7 @@ export interface MovieProps {
   link: string;
   likes: number;
   watched: boolean;
+  genreIds: number[];
 }
 
 export interface MovieCardProps {
@@ -23,7 +25,7 @@ export function MovieCard({
   handleSubmitDisLike,
   handleSubmitWatched,
 }: MovieCardProps) {
-  const { _id, name, imgUrl, link, likes, watched } = movie;
+  const { _id, name, imgUrl, link, likes, watched, genreIds } = movie;
 
   return (
     <div
@@ -38,13 +40,18 @@ export function MovieCard({
           alt="cover"
           className={cn("w-16", watched && "opacity-60")}
         />
-        <a
-          href={link}
-          target="_blank"
-          className="text-2xl hover:text-slate-900 transition duration-200"
-        >
-          {name}
-        </a>
+
+        <div className="flex flex-col gap-2">
+          <a
+            href={link}
+            target="_blank"
+            className="text-2xl hover:text-slate-900 transition duration-200"
+          >
+            {name}
+          </a>
+
+          <GenreList genreIds={genreIds} watched={watched} />
+        </div>
       </div>
 
       <div className="flex gap-3 items-center">

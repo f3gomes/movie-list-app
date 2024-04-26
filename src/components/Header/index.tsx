@@ -36,6 +36,7 @@ export function Header() {
       name: movie.title,
       link: "https://www.themoviedb.org/movie/" + movie.id,
       imgUrl: "https://image.tmdb.org/t/p/original" + movie.poster_path,
+      genreIds: movie.genre_ids,
     };
 
     if (confirm(`Adicionar o filme "${movie.title}" na lista?`)) {
