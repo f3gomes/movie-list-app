@@ -25,7 +25,7 @@ export function GenreList({ genreIds, watched }: GenreListProps) {
             key={item}
             className={cn(
               watched && "bg-opacity-60",
-              "text-white bg-slate-800 px-2 py-[2px] rounded-full text-sm"
+              "text-white bg-slate-800 px-2 py-[2px] rounded-full text-xs sm:text-sm text-nowrap"
             )}
           >
             {item}

@@ -31,7 +31,7 @@ export function MovieCard({
     <div
       className={cn(
         watched && "bg-opacity-60",
-        "bg-[#6573ea] text-white rounded-sm flex justify-between h-28 py-7 px-3"
+        "bg-[#6573ea] text-white rounded-sm flex justify-between h-28 py-7 px-3 relative"
       )}
     >
       <div className="flex gap-4 items-center">
@@ -41,11 +41,11 @@ export function MovieCard({
           className={cn("w-16", watched && "opacity-60")}
         />
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mt-6 sm:mt-0">
           <a
             href={link}
             target="_blank"
-            className="text-2xl hover:text-slate-900 transition duration-200"
+            className="text-xl sm:text-2xl hover:text-slate-900 transition duration-200"
           >
             {name}
           </a>
@@ -54,7 +54,7 @@ export function MovieCard({
         </div>
       </div>
 
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-3 items-center absolute right-3 top-1">
         <span className="text-3xl">{likes}</span>
 
         {likes > 2 ? (
