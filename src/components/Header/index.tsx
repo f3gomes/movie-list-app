@@ -5,6 +5,7 @@ import { getMovies } from "../../actions/getMovieList";
 import { addNewMovie } from "../../actions/postNewMovie";
 import { getMovieIMDB } from "../../actions/getMovieIMDB";
 import { useGlobalContext } from "../../context/Provider";
+import { useParams } from "react-router-dom";
 
 export interface MovieDataProps {
   name: string;
@@ -16,6 +17,8 @@ export function Header() {
   const [resultList, setResultList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const { setIsLoading, setMovieList } = useGlobalContext();
+
+  const { group } = useParams();
 
   const handleGetMovieInfo = async (query: string) => {
     await getMovieIMDB(query, setResultList);
@@ -31,8 +34,9 @@ export function Header() {
     setResultList([]);
   };
 
-  const handleGetMovieResult = async (movie: any) => {
+  const handleNewMovie = async (movie: any) => {
     const movieInfo = {
+      group: group,
       name: movie.title,
       link: "https://www.themoviedb.org/movie/" + movie.id,
       imgUrl: "https://image.tmdb.org/t/p/original" + movie.poster_path,
@@ -45,7 +49,7 @@ export function Header() {
       await addNewMovie(movieInfo, setIsLoading);
 
       setTimeout(() => {
-        getMovies(setMovieList, setIsLoading);
+        getMovies(setMovieList, setIsLoading, group);
       }, 1000);
     }
   };
@@ -82,7 +86,7 @@ export function Header() {
           <div
             key={item.id}
             className="cursor-pointer px-2 py-1 hover:bg-slate-200 transition duration-200"
-            onClick={() => handleGetMovieResult(item)}
+            onClick={() => handleNewMovie(item)}
           >
             {item.title} {"("}
             {item.release_date.substring(0, 4)}

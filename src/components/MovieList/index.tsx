@@ -4,18 +4,21 @@ import { getMovies } from "../../actions/getMovieList";
 import { sendLike } from "../../actions/sendLike";
 import { sendStatus } from "../../actions/sendStatus";
 import { useGlobalContext } from "../../context/Provider";
+import { useParams } from "react-router-dom";
 
 export function MovieList() {
   const [watched, setWatched] = useState(false);
   const { isLoading, setIsLoading, movieList, setMovieList } =
     useGlobalContext();
 
+  const { group } = useParams();
+
   const handleSubmitLike = (id: string) => {
     if (confirm("Enviar Like?")) {
       sendLike(id, 1, setIsLoading);
 
       setTimeout(() => {
-        getMovies(setMovieList, setIsLoading);
+        getMovies(setMovieList, setIsLoading, group);
       }, 1000);
     }
   };
@@ -25,7 +28,7 @@ export function MovieList() {
       sendLike(id, -1, setIsLoading);
 
       setTimeout(() => {
-        getMovies(setMovieList, setIsLoading);
+        getMovies(setMovieList, setIsLoading, group);
       }, 1000);
     }
   };
@@ -37,7 +40,7 @@ export function MovieList() {
       sendStatus(id, status, setIsLoading);
 
       setTimeout(() => {
-        getMovies(setMovieList, setIsLoading);
+        getMovies(setMovieList, setIsLoading, group);
       }, 1000);
     }
   };
@@ -60,8 +63,8 @@ export function MovieList() {
   });
 
   useEffect(() => {
-    getMovies(setMovieList, setIsLoading);
-  }, [setIsLoading, setMovieList]);
+    getMovies(setMovieList, setIsLoading, group);
+  }, [setIsLoading, setMovieList, group]);
 
   if (isLoading) {
     return (
