@@ -38,7 +38,7 @@ export function Header() {
     const movieInfo = {
       group: group,
       name: movie.title,
-      link: "https://www.themoviedb.org/movie/" + movie.id,
+      link: "https://www.themoviedb.org/movie/" + movie.id + "?language=pt-BR",
       imgUrl: "https://image.tmdb.org/t/p/original" + movie.poster_path,
       genreIds: movie.genre_ids,
     };
