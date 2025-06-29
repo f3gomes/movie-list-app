@@ -19,7 +19,7 @@ export function GenreList({ genreIds, watched }: GenreListProps) {
 
   return (
     <div className="flex gap-2">
-      {filteredGenres?.map((item: string) => {
+      {filteredGenres?.slice(0, 4).map((item: string) => {
         return (
           <div
             key={item}

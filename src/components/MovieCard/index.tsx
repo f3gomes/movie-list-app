@@ -1,6 +1,7 @@
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { cn } from "../../utils/merge";
 import { GenreList } from "../GenreList";
+import LinkTruncate from "../LinkTruncate";
 
 export interface MovieProps {
   _id: string;
@@ -31,27 +32,19 @@ export function MovieCard({
     <div
       className={cn(
         watched && "bg-opacity-60",
-        "bg-[#6573ea] text-white rounded-sm flex justify-between h-28 py-7 px-3 relative"
+        "bg-[#6573ea] text-white rounded-sm flex gap-4 items-center h-28 py-7 px-3 relative"
       )}
     >
-      <div className="flex gap-4 items-center">
-        <img
-          src={imgUrl}
-          alt="cover"
-          className={cn("w-16", watched && "opacity-60")}
-        />
+      <img
+        src={imgUrl}
+        alt="cover"
+        className={cn("w-16", watched && "opacity-60")}
+      />
 
-        <div className="flex flex-col gap-2 mt-6 sm:mt-0">
-          <a
-            href={link}
-            target="_blank"
-            className="text-xl sm:text-2xl hover:text-slate-900 transition duration-200"
-          >
-            {name}
-          </a>
+      <div className="flex flex-col justify-between gap-2 h-24">
+        <LinkTruncate name={name} link={link} />
 
-          <GenreList genreIds={genreIds} watched={watched} />
-        </div>
+        <GenreList genreIds={genreIds} watched={watched} />
       </div>
 
       <div className="flex gap-3 items-center absolute right-3 top-1">
